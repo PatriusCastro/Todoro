@@ -7,7 +7,7 @@ export default function Pomodoro() {
   const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setInterval>;
     if (isRunning && time > 0) {
       timer = setInterval(() => setTime((prev) => prev - 1), 1000);
     }
