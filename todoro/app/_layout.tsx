@@ -25,12 +25,12 @@ function TabsContent() {
           tabBarActiveTintColor: "#3b82f6",
           tabBarInactiveTintColor: isDarkMode ? "#8e8e93" : "#6b7280",
           tabBarStyle: { 
-            backgroundColor: isDarkMode ? "#171717" : "white",
+            backgroundColor: isDarkMode ? "#000" : "white",
             borderTopColor: isDarkMode ? "#38383a" : "#f3f4f6",
             paddingTop: 6,
             paddingBottom: 6
           },
-          headerStyle: { backgroundColor: isDarkMode ? "#171717" : "white" },
+          headerStyle: { backgroundColor: isDarkMode ? "#000" : "white" },
           headerTintColor: isDarkMode ? "#ffffff" : "#000",
           headerTitleStyle: { fontWeight: "bold", fontSize: 24 },
           headerShadowVisible: false,

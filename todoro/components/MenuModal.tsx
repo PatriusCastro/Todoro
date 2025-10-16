@@ -44,7 +44,7 @@ export default function MenuModal({ visible, onClose }: MenuModalProps) {
     >
       <View className="flex-1 bg-gray-50 dark:bg-black">
         {/* Header */}
-        <View className="flex-row items-center justify-between px-4 pt-4 pb-4 bg-white dark:bg-neutral-900">
+        <View className="flex-row items-center justify-between px-4 pt-4 pb-4 bg-white dark:bg-black">
           <View className="flex-row items-center">
             <TouchableOpacity onPress={onClose} className="mr-3">
               <ChevronRight 
@@ -53,7 +53,7 @@ export default function MenuModal({ visible, onClose }: MenuModalProps) {
                 style={{ transform: [{ rotate: '180deg' }] }} 
               />
             </TouchableOpacity>
-            <Text className="text-xl font-semibold text-black dark:text-white">
+            <Text className="text-2xl font-semibold text-black dark:text-white">
               Settings
             </Text>
           </View>
