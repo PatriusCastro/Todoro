@@ -1,25 +1,51 @@
 import "../global.css";
 import { Tabs } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Home, Clock, ListTodo } from "lucide-react-native";
+import { Home, Hourglass, ListTodo } from "lucide-react-native";
+import { TouchableOpacity, View } from "react-native";
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import { useState } from "react";
+import MenuModal from "../components/MenuModal";
+import { ThemeProvider, useTheme } from "../context/ThemeContext";
 
-export default function Layout() {
+// Separate component that uses the theme
+function TabsContent() {
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const { isDarkMode } = useTheme();
+
+  const handleMenuPress = () => {
+    setIsMenuVisible(true);
+  };
+
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar style={isDarkMode ? "light" : "dark"} />
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: "#3b82f6",
-          tabBarStyle: { backgroundColor: "white" },
-          headerStyle: { backgroundColor: "#3b82f6" },
-          headerTintColor: "#fff",
-          headerTitleStyle: { fontWeight: "bold" },
+          tabBarInactiveTintColor: isDarkMode ? "#8e8e93" : "#6b7280",
+          tabBarStyle: { 
+            backgroundColor: isDarkMode ? "#171717" : "white",
+            borderTopColor: isDarkMode ? "#38383a" : "#f3f4f6",
+            paddingTop: 6,
+            paddingBottom: 6
+          },
+          headerStyle: { backgroundColor: isDarkMode ? "#171717" : "white" },
+          headerTintColor: isDarkMode ? "#ffffff" : "#000",
+          headerTitleStyle: { fontWeight: "bold", fontSize: 24 },
+          headerShadowVisible: false,
+          tabBarShowLabel: false,
+          headerRight: () => (
+            <TouchableOpacity onPress={handleMenuPress} style={{ marginRight: 16 }}>
+              <FontAwesome6 name="equals" size={24} color={isDarkMode ? "#ffffff" : "#000"} />
+            </TouchableOpacity>
+          ),
         }}
       >
         <Tabs.Screen
           name="index"
           options={{
-            title: "Home",
+            title: "Hello, Kath!",
             tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
           }}
         />
@@ -27,7 +53,7 @@ export default function Layout() {
           name="pomodoro"
           options={{
             title: "Pomodoro",
-            tabBarIcon: ({ color, size }) => <Clock color={color} size={size} />,
+            tabBarIcon: ({ color, size }) => <Hourglass color={color} size={size} />,
           }}
         />
         <Tabs.Screen
@@ -38,6 +64,20 @@ export default function Layout() {
           }}
         />
       </Tabs>
+
+      <MenuModal 
+        visible={isMenuVisible} 
+        onClose={() => setIsMenuVisible(false)} 
+      />
     </>
+  );
+}
+
+// Root component that wraps everything with ThemeProvider
+export default function Layout() {
+  return (
+    <ThemeProvider>
+      <TabsContent />
+    </ThemeProvider>
   );
 }
